@@ -1,9 +1,9 @@
-FROM docker.io/paritytech/ci-unified:latest as builder
+FROM docker.io/paritytech/ci-unified:latest AS builder
 
 WORKDIR /polkadot
 COPY . /polkadot
 
-RUN cargo fetch
+RUN cargo fetch --locked
 RUN cargo build --locked --release
 
 FROM docker.io/parity/base-bin:latest
