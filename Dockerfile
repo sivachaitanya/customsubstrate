@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         clang \
         pkg-config \
         libssl-dev \
+        protobuf-compiler \
     && curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --default-toolchain ${RUST_VERSION} \
     && rustup toolchain install ${RUST_VERSION} --profile minimal --target wasm32-unknown-unknown \
     && rustup default ${RUST_VERSION} \
