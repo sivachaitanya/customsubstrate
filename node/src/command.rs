@@ -65,10 +65,6 @@ pub fn run() -> sc_cli::Result<()> {
 				Ok((cmd.run(client, import_queue), task_manager))
 			})
 		},
-		Some(Subcommand::ExportChainSpec(cmd)) => {
-			let chain_spec = cli.load_spec(&cmd.chain)?;
-			cmd.run(chain_spec)
-		},
 		Some(Subcommand::ExportBlocks(cmd)) => {
 			let runner = cli.create_runner(cmd)?;
 			runner.async_run(|config| {
@@ -186,7 +182,12 @@ pub fn run() -> sc_cli::Result<()> {
 		None => {
 			let runner = cli.create_runner(&cli.run)?;
 			runner.run_node_until_exit(|config| async move {
-				match config.network.network_backend {
+				let backend = config
+					.network
+					.network_backend
+					.unwrap_or(sc_network::config::NetworkBackendType::Libp2p);
+
+				match backend {
 					sc_network::config::NetworkBackendType::Libp2p => service::new_full::<
 						sc_network::NetworkWorker<
 							solochain_template_runtime::opaque::Block,
