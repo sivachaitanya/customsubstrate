@@ -38,7 +38,6 @@ use sp_runtime::{
 	transaction_validity::{TransactionSource, TransactionValidity},
 	ApplyExtrinsicResult,
 };
-use sp_session::OpaqueGeneratedSessionKeys;
 use sp_version::RuntimeVersion;
 
 // Local module imports
@@ -53,7 +52,7 @@ impl_runtime_apis! {
 			VERSION
 		}
 
-		fn execute_block(block: <Block as BlockT>::LazyBlock) {
+		fn execute_block(block: Block) {
 			Executive::execute_block(block);
 		}
 
@@ -96,7 +95,7 @@ impl_runtime_apis! {
 		}
 
 		fn check_inherents(
-			block: <Block as BlockT>::LazyBlock,
+			block: Block,
 			data: sp_inherents::InherentData,
 		) -> sp_inherents::CheckInherentsResult {
 			data.check_extrinsics(&block)
@@ -130,8 +129,8 @@ impl_runtime_apis! {
 	}
 
 	impl sp_session::SessionKeys<Block> for Runtime {
-		fn generate_session_keys(owner: Vec<u8>, seed: Option<Vec<u8>>) -> OpaqueGeneratedSessionKeys {
-			SessionKeys::generate(&owner, seed).into()
+		fn generate_session_keys(seed: Option<Vec<u8>>) -> Vec<u8> {
+			SessionKeys::generate(seed)
 		}
 
 		fn decode_session_keys(
@@ -278,7 +277,7 @@ impl_runtime_apis! {
 		}
 
 		fn execute_block(
-			block: <Block as BlockT>::LazyBlock,
+			block: Block,
 			state_root_check: bool,
 			signature_check: bool,
 			select: frame_try_runtime::TryStateSelect
