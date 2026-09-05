@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libssl-dev \
         protobuf-compiler \
     && curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --default-toolchain ${RUST_VERSION} \
-    && rustup toolchain install ${RUST_VERSION} --profile minimal --target wasm32-unknown-unknown \
+    && rustup toolchain install ${RUST_VERSION} --profile minimal --component rust-src --target wasm32-unknown-unknown \
     && rustup default ${RUST_VERSION} \
     && rm -rf /var/lib/apt/lists/*
 
