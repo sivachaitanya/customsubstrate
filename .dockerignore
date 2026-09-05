@@ -1,3 +1,9 @@
 target/
 Dockerfile
 .dockerignore
+.git/
+.github/
+docs/
+env-setup/
+README.md
+LICENSE

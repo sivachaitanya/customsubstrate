@@ -4,7 +4,7 @@ WORKDIR /polkadot
 COPY . /polkadot
 
 RUN cargo fetch --locked
-RUN cargo build --locked --release
+RUN cargo build --locked --release -p solochain-template-node
 
 FROM docker.io/parity/base-bin:latest
 
