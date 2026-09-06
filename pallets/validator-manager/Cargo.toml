@@ -22,7 +22,7 @@ scale-info = { features = ["derive"], workspace = true }
 frame-support = { workspace = true }
 frame-system = { workspace = true }
 pallet-session = { workspace = true }
-sp-staking = { version = "36.0.0", default-features = false }
+sp-staking = { workspace = true }
 
 [features]
 default = ["std"]
