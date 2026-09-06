@@ -138,8 +138,6 @@ impl pallet_session::Config for Runtime {
 	type Keys = SessionKeys;
 	type DisablingStrategy = ();
 	type WeightInfo = ();
-	type Currency = Balances;
-	type KeyDeposit = ConstU128<0>;
 }
 
 impl pallet_grandpa::Config for Runtime {

@@ -5958,18 +5958,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "pallet-validator-manager"
-version = "0.0.0"
-dependencies = [
- "frame-support",
- "frame-system",
- "pallet-session",
- "parity-scale-codec",
- "scale-info",
- "sp-staking",
-]
-
-[[package]]
 name = "pallet-timestamp"
 version = "39.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6034,6 +6022,18 @@ dependencies = [
  "sp-api",
  "sp-runtime",
  "sp-weights",
+]
+
+[[package]]
+name = "pallet-validator-manager"
+version = "0.0.0"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "pallet-session",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-staking",
 ]
 
 [[package]]
