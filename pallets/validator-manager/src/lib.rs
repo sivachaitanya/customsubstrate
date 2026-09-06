@@ -7,7 +7,8 @@ pub use pallet::*;
 
 #[frame_support::pallet]
 pub mod pallet {
-    use frame_support::pallet_prelude::*;
+    use alloc::vec::Vec;
+    use frame_support::{pallet_prelude::*, BoundedVec};
     use frame_system::pallet_prelude::*;
 
     #[pallet::pallet]
@@ -18,11 +19,13 @@ pub mod pallet {
         #[allow(deprecated)]
         type RuntimeEvent: From<Event<Self>> + IsType<<Self as frame_system::Config>::RuntimeEvent>;
         type AddRemoveOrigin: EnsureOrigin<Self::RuntimeOrigin>;
+        type MaxValidators: Get<u32>;
     }
 
     #[pallet::storage]
     #[pallet::getter(fn validators)]
-    pub type Validators<T: Config> = StorageValue<_, Vec<T::AccountId>, ValueQuery>;
+    pub type Validators<T: Config> =
+        StorageValue<_, BoundedVec<T::AccountId, T::MaxValidators>, ValueQuery>;
 
     #[pallet::genesis_config]
     #[derive(frame_support::DefaultNoBound)]
@@ -33,7 +36,10 @@ pub mod pallet {
     #[pallet::genesis_build]
     impl<T: Config> BuildGenesisConfig for GenesisConfig<T> {
         fn build(&self) {
-            Validators::<T>::put(self.initial_validators.clone());
+            let validators =
+                BoundedVec::<T::AccountId, T::MaxValidators>::try_from(self.initial_validators.clone())
+                    .expect("initial_validators exceeds MaxValidators");
+            Validators::<T>::put(validators);
         }
     }
 
@@ -47,6 +53,7 @@ pub mod pallet {
     #[pallet::error]
     pub enum Error<T> {
         AlreadyValidator,
+        TooManyValidators,
         NotValidator,
         EmptyValidatorSet,
     }
@@ -60,7 +67,9 @@ pub mod pallet {
 
             Validators::<T>::try_mutate(|validators| {
                 ensure!(!validators.contains(&account), Error::<T>::AlreadyValidator);
-                validators.push(account.clone());
+                validators
+                    .try_push(account.clone())
+                    .map_err(|_| Error::<T>::TooManyValidators)?;
                 Ok::<(), DispatchError>(())
             })?;
 
@@ -89,11 +98,11 @@ pub mod pallet {
 
 impl<T: pallet::Config> pallet_session::SessionManager<T::AccountId> for pallet::Pallet<T> {
     fn new_session(_new_index: sp_staking::SessionIndex) -> Option<Vec<T::AccountId>> {
-        Some(pallet::Validators::<T>::get())
+        Some(pallet::Validators::<T>::get().into_inner())
     }
 
     fn new_session_genesis(_new_index: sp_staking::SessionIndex) -> Option<Vec<T::AccountId>> {
-        Some(pallet::Validators::<T>::get())
+        Some(pallet::Validators::<T>::get().into_inner())
     }
 
     fn end_session(_end_index: sp_staking::SessionIndex) {}

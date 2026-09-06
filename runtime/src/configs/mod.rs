@@ -116,6 +116,7 @@ impl pallet_authorship::Config for Runtime {
 parameter_types! {
 	pub const Period: BlockNumber = 10 * MINUTES;
 	pub const Offset: BlockNumber = 0;
+	pub const MaxValidators: u32 = 100;
 }
 
 pub struct ValidatorIdOf;
@@ -203,6 +204,7 @@ impl pallet_sudo::Config for Runtime {
 impl pallet_validator_manager::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 	type AddRemoveOrigin = frame_system::EnsureRoot<AccountId>;
+	type MaxValidators = MaxValidators;
 }
 
 /// Configure the pallet-template in pallets/template.
