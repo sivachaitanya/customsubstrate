@@ -41,6 +41,18 @@ fn testnet_genesis(
 				.map(|k| (k, 1u128 << 60))
 				.collect::<Vec<_>>(),
 		},
+		aura: pallet_aura::GenesisConfig {
+			authorities: initial_authorities
+				.iter()
+				.map(|(_, aura, _)| aura.clone())
+				.collect::<Vec<_>>(),
+		},
+		grandpa: pallet_grandpa::GenesisConfig {
+			authorities: initial_authorities
+				.iter()
+				.map(|(_, _, grandpa)| (grandpa.clone(), 1))
+				.collect::<Vec<_>>(),
+		},
 		session: SessionConfig {
 			keys: initial_authorities
 				.iter()
