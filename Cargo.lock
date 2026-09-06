@@ -5958,6 +5958,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-validator-manager"
+version = "0.0.0"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "pallet-session",
+ "parity-scale-codec",
+ "scale-info",
+]
+
+[[package]]
 name = "pallet-timestamp"
 version = "39.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9469,13 +9480,16 @@ dependencies = [
  "frame-system-rpc-runtime-api",
  "frame-try-runtime",
  "pallet-aura",
+ "pallet-authorship",
  "pallet-balances",
  "pallet-grandpa",
+ "pallet-session",
  "pallet-sudo",
  "pallet-template",
  "pallet-timestamp",
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc-runtime-api",
+ "pallet-validator-manager",
  "parity-scale-codec",
  "scale-info",
  "serde_json",
