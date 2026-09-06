@@ -5966,6 +5966,7 @@ dependencies = [
  "pallet-session",
  "parity-scale-codec",
  "scale-info",
+ "sp-staking",
 ]
 
 [[package]]

@@ -1,5 +1,8 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
+extern crate alloc;
+use alloc::vec::Vec;
+
 pub use pallet::*;
 
 #[frame_support::pallet]
@@ -85,15 +88,15 @@ pub mod pallet {
 }
 
 impl<T: pallet::Config> pallet_session::SessionManager<T::AccountId> for pallet::Pallet<T> {
-    fn new_session(_new_index: pallet_session::SessionIndex) -> Option<Vec<T::AccountId>> {
+    fn new_session(_new_index: sp_staking::SessionIndex) -> Option<Vec<T::AccountId>> {
         Some(pallet::Validators::<T>::get())
     }
 
-    fn new_session_genesis(_new_index: pallet_session::SessionIndex) -> Option<Vec<T::AccountId>> {
+    fn new_session_genesis(_new_index: sp_staking::SessionIndex) -> Option<Vec<T::AccountId>> {
         Some(pallet::Validators::<T>::get())
     }
 
-    fn end_session(_end_index: pallet_session::SessionIndex) {}
+    fn end_session(_end_index: sp_staking::SessionIndex) {}
 
-    fn start_session(_start_index: pallet_session::SessionIndex) {}
+    fn start_session(_start_index: sp_staking::SessionIndex) {}
 }

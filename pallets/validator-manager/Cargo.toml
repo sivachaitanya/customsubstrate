@@ -22,6 +22,7 @@ scale-info = { features = ["derive"], workspace = true }
 frame-support = { workspace = true }
 frame-system = { workspace = true }
 pallet-session = { workspace = true }
+sp-staking = { version = "36.0.0", default-features = false }
 
 [features]
 default = ["std"]
@@ -31,6 +32,7 @@ std = [
     "frame-system/std",
     "pallet-session/std",
     "scale-info/std",
+    "sp-staking/std",
 ]
 runtime-benchmarks = [
     "frame-support/runtime-benchmarks",
