@@ -8,6 +8,7 @@ edition = "2021"
 [workspace]
 members = [
     "node",
+    "pallets/provenanceledger",
     "pallets/template",
     "pallets/validator-manager",
     "runtime",
@@ -32,6 +33,7 @@ all = { level = "allow", priority = 0 }
 [workspace.dependencies]
 solochain-template-runtime = { path = "./runtime", default-features = false }
 pallet-template = { path = "./pallets/template", default-features = false }
+pallet-provenanceledger = { path = "./pallets/provenanceledger", default-features = false }
 pallet-validator-manager = { path = "./pallets/validator-manager", default-features = false }
 clap = { version = "4.5.13" }
 frame-benchmarking-cli = { version = "47.0.0", default-features = false }
@@ -89,6 +91,7 @@ sp-offchain = { version = "36.0.0", default-features = false }
 sp-session = { version = "38.1.0", default-features = false }
 sp-storage = { version = "22.0.0", default-features = false }
 sp-staking = { version = "38.0.0", default-features = false }
+sp-std = { version = "14.0.0", default-features = false }
 sp-transaction-pool = { version = "36.0.0", default-features = false }
 sp-version = { version = "39.0.0", default-features = false }
 substrate-wasm-builder = { version = "26.0.1", default-features = false }

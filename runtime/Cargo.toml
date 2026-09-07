@@ -37,6 +37,7 @@ pallet-sudo = { workspace = true }
 pallet-validator-manager = { workspace = true }
 pallet-timestamp = { workspace = true }
 pallet-transaction-payment = { workspace = true }
+pallet-provenanceledger = { workspace = true }
 
 # primitives
 sp-api = { workspace = true }
@@ -84,6 +85,7 @@ std = [
 	"pallet-authorship/std",
 	"pallet-balances/std",
 	"pallet-grandpa/std",
+	"pallet-provenanceledger/std",
 	"pallet-session/std",
 	"pallet-sudo/std",
 	"pallet-template/std",
@@ -116,6 +118,7 @@ runtime-benchmarks = [
 	"frame-system/runtime-benchmarks",
 	"pallet-balances/runtime-benchmarks",
 	"pallet-grandpa/runtime-benchmarks",
+	"pallet-provenanceledger/runtime-benchmarks",
 	"pallet-sudo/runtime-benchmarks",
 	"pallet-template/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
@@ -131,6 +134,7 @@ try-runtime = [
 	"pallet-aura/try-runtime",
 	"pallet-balances/try-runtime",
 	"pallet-grandpa/try-runtime",
+	"pallet-provenanceledger/try-runtime",
 	"pallet-sudo/try-runtime",
 	"pallet-template/try-runtime",
 	"pallet-timestamp/try-runtime",

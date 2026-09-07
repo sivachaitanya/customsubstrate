@@ -219,4 +219,7 @@ mod runtime {
 
 	#[runtime::pallet_index(10)]
 	pub type ValidatorManager = pallet_validator_manager;
+
+	#[runtime::pallet_index(11)]
+	pub type ProvenanceLedger = pallet_provenanceledger;
 }

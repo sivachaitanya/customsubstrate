@@ -5906,6 +5906,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-provenanceledger"
+version = "0.0.0"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-io",
+ "sp-std",
+]
+
+[[package]]
 name = "pallet-session"
 version = "40.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9484,6 +9496,7 @@ dependencies = [
  "pallet-authorship",
  "pallet-balances",
  "pallet-grandpa",
+ "pallet-provenanceledger",
  "pallet-session",
  "pallet-sudo",
  "pallet-template",

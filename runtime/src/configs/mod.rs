@@ -205,6 +205,10 @@ impl pallet_validator_manager::Config for Runtime {
 	type MaxValidators = MaxValidators;
 }
 
+impl pallet_provenanceledger::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+}
+
 /// Configure the pallet-template in pallets/template.
 impl pallet_template::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
